@@ -18,12 +18,13 @@ int isInSet(complex<double> c, int max_iter, double threshold) {
     complex<double> z = (0, 0); //complex number z, used in the formula
     int iter; //iterations of the formula
     for (iter = 0; iter < max_iter; iter++) {
-        if (abs(z) > threshold)
+        if (abs(z) > threshold) //if the number is too much, consider the function converging to infinity
             break;
 
         //if z is exceeding threshold, c is not in mandelbrot set
         //either way, we memorize iterations, which tell how quickly z converges to infinity
         //else, when iterations are done enough times (max_iter), the cycle will end naturally
+        //in that case, when the cycle has been done max_iter times and still did not break, consider the function not converging to infinity
 
         z = z * z + c; //the formula
     }
@@ -32,7 +33,7 @@ int isInSet(complex<double> c, int max_iter, double threshold) {
 
 void generateMandelbrotSet(int window_width, int window_height, int max_iter, double threshold, double x_min, double x_max, double y_min, double y_max) {
 
-    vector<vector<int>> colors(window_height, vector<int>(window_width, -1));
+    vector<vector<int>> colors(window_height, vector<int>(window_width, -1)); //vector of vectors. stores color values for all future image pixels
 
     double real;
     double imag;
@@ -63,7 +64,7 @@ void generateMandelbrotSet(int window_width, int window_height, int max_iter, do
     {
         for (int x = 0; x < window_width; x++)
         {
-            file << colors[y][x] << " " << colors[y][x] << " " << colors[y][x] << " ";
+            file << colors[y][x] << " " << colors[y][x] << " " << colors[y][x] << " "; //RGB values for a pixel
         }
         file << "\n";
     }
@@ -72,14 +73,14 @@ void generateMandelbrotSet(int window_width, int window_height, int max_iter, do
 }
 
 int main() {
-    double time = omp_get_wtime();
+    double time = omp_get_wtime(); //time of start
 
     generateMandelbrotSet(width, height, max_iter, threshold, x_min, x_max, y_min, y_max);
 
-    time = omp_get_wtime() - time;
-    int timeS = (int)time;
-    time = (time - timeS) * 1000;
-    int timeMS = (int)time;
+    time = omp_get_wtime() - time; //time taken = start time - end time
+    int timeS = (int)time; //convert into integer seconds
+    time = (time - timeS) * 1000; //get milliseconds
+    int timeMS = (int)time; //convert into integer milliseconds
 
     cout << "Mandelbrot set image generated in 'mandelbrot_set.ppm'" << endl;
     cout << "Time = " << timeS << " s " << timeMS << " ms" << endl;
