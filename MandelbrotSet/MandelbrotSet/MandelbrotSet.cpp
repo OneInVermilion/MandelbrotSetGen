@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <complex>
-#include <omp.h>
-#include <time.h>
 #include <vector>
+#include <omp.h>
 
 using namespace std;
 
