@@ -10,10 +10,10 @@ Tests (1000x1000, max_iter = 50, threshold = 10, x[-2; 2], y[-2; 2]):
 
     2 threads: approx. 5 s 200 ms
 
-    4 threads: 5 s 0 ms
+    4 threads: approx. 5 s 0 ms
 
-    8 threads: 4 s 800 ms
+    8 threads: approx. 4 s 800 ms
 
-    12 threads: 4 s 700 ms
+    12 threads: approx. 4 s 700 ms
 
 _Due to supposed false sharing, with more than one threads, the image is generated with some pixels having incorrect colors_
